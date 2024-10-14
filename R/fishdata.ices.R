@@ -12,7 +12,8 @@ fishdata.ices <- function(Stock_Name=NULL,Assessment_Year=NULL,update=FALSE,from
   if (is.null(to)) {to=as.numeric(format(Sys.time(), "%Y"))}
     if (is.null(exclude)) {exclude=c(-1)}
 
-    assessments <- StockList(seq(from,to))
+    #assessments <- StockList(seq(from,to))
+    assessments <- do.call(rbind, lapply(seq(from,to), function(y) StockList(year = y)))
     #Deprectated function getListStocks(seq(from,to))
 
     #Attention spécificité sur les 3 sous stock  cod.27.46a7d20 3 évaluations pour le même stock
